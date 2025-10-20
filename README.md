@@ -1,4 +1,4 @@
-🔐 Web Security Configuration Assessment — Public Case Study
+🔐My Second Web Security Configuration Assessment — Public Case Study
 
 Author: Pavle Stankovic
 Date: October 18, 2025
