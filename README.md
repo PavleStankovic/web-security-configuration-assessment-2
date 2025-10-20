@@ -127,8 +127,8 @@ You may share this work for educational purposes with attribution.
 You may not modify or use commercially without permission.
 
 📁 Repository Contents
-├── Web Security Configuration Assessment.pdf   # Full detailed report
-└── README.md                                   # Summary & highlights
+── Web Security Configuration Assessment.pdf--->Full detailed report
+── README.md----------------------------------->Summary & highlights
 
 
 The full technical details, scans, and configuration examples are available in the PDF report.
