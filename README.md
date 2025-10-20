@@ -1,141 +1,119 @@
-🔐My Second Web Security Configuration Assessment — Public Case Study
+# 🔐 Web Security Configuration Assessment — Public Case Study
 
-Author: Pavle Stankovic
-Date: October 18, 2025
-Domain: svstudiodesign.com
-Location: Serbia
-Age: 17
-License: CC BY-NC-ND 4.0
+**Author:** Pavle Stankovic  
+**Date:** October 18, 2025  
+**Location:** Serbia  
+**Age:** 17  
+**Domain:** `svstudiodesign.com`  
+**License:** CC BY-NC-ND 4.0  
 
-🧭 Overview
+---
 
-This public case study presents a real-world assessment of the SSL/TLS configuration and HTTP security headers of a production website (svstudiodesign.com), performed with explicit permission from the owner.
+## 🧭 Overview
 
-The objective was to:
+This public case study examines the **SSL/TLS configuration** and **HTTP security headers** of a live production domain (`svstudiodesign.com`), conducted with **explicit permission from the owner**.  
+The objective was to identify configuration gaps, evaluate security posture against **modern industry standards**, and document the remediation process for **learning and transparency**.
 
-Evaluate alignment with modern web security standards
+The assessment follows **OWASP**, **NIST**, and **PCI DSS v4.0** guidelines while maintaining a **non-intrusive, ethical approach**.
 
-Detect configuration weaknesses
+---
 
-Provide clear, actionable remediation steps
+## ⚙️ Scope & Methodology
 
-Document the process for educational and professional growth
+**Scope:**  
+- SSL/TLS protocol configuration  
+- Certificate validation & transparency (SCT, OCSP)  
+- Supported cipher suites & forward secrecy  
+- HTTP response security headers  
 
-This assessment follows ethical, non-intrusive methods and references OWASP, NIST, and PCI DSS v4.0 standards—demonstrating a professional-level security approach.
+**Out of Scope:**  
+- Internal infrastructure  
+- Application logic  
+- Authentication or intrusive exploitation  
 
-⚙️ Scope & Methodology
-✅ In Scope
+**Tools Used:**  
+- `sslyze` (TLS scanning)  
+- `nmap` (port/service enumeration)  
+- `curl`, `openssl` (header & handshake analysis)  
+- `testssl.sh` (TLS simulation & vulnerability checks)  
+- Browser DevTools  
 
-SSL/TLS protocol analysis
+**Methodology References:**  
+- NIST SP 800-115  
+- OWASP Testing Guide v5  
 
-Certificate validation & transparency (SCTs, OCSP Stapling)
+---
 
-Supported cipher suites & forward secrecy
+## 🔎 Key Findings
 
-HTTP response security headers
+| Issue | Severity | Recommendation |
+|-------|-----------|----------------|
+| Missing HSTS header | Medium | Add Strict-Transport-Security |
+| Missing CSP header | Medium | Implement a restrictive Content-Security-Policy |
+| Missing X-Frame-Options | Low | Add DENY or SAMEORIGIN |
+| Missing X-Content-Type-Options | Low | Set to nosniff |
+| Missing Referrer-Policy | Low | Add strict-origin or no-referrer |
+| OCSP Stapling disabled | Low | Enable stapling in server config |
+| Low SCT count (2) | Low | Reissue certificate with ≥3 SCTs |
+| 404 on common subpages | Low | Fix or remove broken endpoints |
 
-❌ Out of Scope
+✅ **TLS 1.2/1.3 supported**  
+✅ **Forward Secrecy enabled**  
+✅ **Modern cipher suites** (AES-GCM, ChaCha20-Poly1305)  
+✅ **No critical vulnerabilities** (e.g., Heartbleed, POODLE, ROBOT)
 
-Internal infrastructure
+---
 
-Authentication/session testing
+## 🛠️ Recommended Fixes
 
-Application logic or intrusive exploitation
+Configuration examples for **Apache** and **Nginx** are included in the full report.  
+Remediation focuses on achieving an **A+ SSL Labs rating** and aligning with **OWASP A05:2021 – Security Misconfiguration**.
 
-Social engineering
+---
 
-🛠 Tools Utilized
-Tool	Purpose
-sslyze	TLS protocol & certificate analysis
-nmap	Port & service discovery
-curl / openssl	Header inspection & handshake testing
-testssl.sh	Full TLS vulnerability scanning
-Qualys SSL Labs	External grading & validation
-Browser DevTools	Real-world header behavior
-📚 Methodology References
+## 📊 Compliance Mapping
 
-NIST SP 800-115 – Technical test framework
+| Standard | Requirement | Status |
+|-----------|-------------|--------|
+| OWASP Top 10:2021 | A05: Security Misconfiguration | Addressed |
+| NIST SP 800-52 Rev. 2 | Strong TLS & cipher usage | Compliant |
+| PCI DSS v4.0 | Req. 4: Secure transmission | Compliant |
+| NIST SP 800-53 (SC-8) | Transmission integrity | Partially Met |
+| GDPR/HIPAA | Encryption for data protection | Compliant |
 
-OWASP Testing Guide v5 – Web configuration best practices
+---
 
-PCI DSS v4.0 – Secure transmission requirements
+## 🧠 About the Author
 
-🔎 Key Findings
-Issue	Severity	Recommendation
-Missing HSTS header	Medium	Enforce Strict-Transport-Security
-Missing CSP policy	Medium	Implement restrictive Content-Security-Policy
-Missing X-Frame-Options	Low	Add DENY or SAMEORIGIN
-Missing X-Content-Type-Options	Low	Set nosniff
-Missing Referrer-Policy	Low	Add strict-origin or no-referrer
-OCSP Stapling disabled	Low	Enable on server
-Low SCTs (2)	Low	Reissue certificate with ≥3 SCTs
-404 on common subpages	Low	Fix or remove broken endpoints
+👋 I’m **Pavle Stankovic**, a **17-year-old cybersecurity enthusiast from Serbia** passionate about **web security, TLS, and ethical hacking**.  
+I learn by performing **real-world assessments**, implementing secure configurations, and sharing knowledge through public case studies.
 
-✅ Positive Security Controls
+- 🌍 Location: Serbia  
+- 🎓 Student | Cybersecurity Learner  
+- 💡 Focus: TLS, HTTP security, OWASP practices, Linux hardening  
+- ✔ Certified in Cybersecurity (CC) – (ISC)²  
+- 📧 Email: [stankovic.pavle16@gmail.com](mailto:stankovic.pavle16@gmail.com)  
+- 💼 LinkedIn: [linkedin.com/in/pavle-stanković-914694386](https://linkedin.com/in/pavle-stanković-914694386)
 
-TLS 1.2 / 1.3 only (no deprecated protocols)
+---
 
-Strong modern cipher suites (AES-GCM, ChaCha20-Poly1305)
+## 📘 License
 
-Forward Secrecy supported
+This work is licensed under **[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)**  
+You may **read and share for educational purposes**, but please **credit the author** and **do not modify or use commercially**.
 
-No major vulnerabilities (Heartbleed, POODLE, ROBOT, etc.)
+---
 
-HTTPS enforced (HTTP redirect implemented)
+## 🧩 Files
 
-🛠 Remediation Highlights
+- [`Web Security Configuration Assessment.pdf`](./Web%20Security%20Configuration%20Assessment.pdf) — Full detailed report  
+- `README.md` — Summary and key insights  
 
-(Full configuration examples included in the PDF report)
+---
 
-Add security headers via .htaccess / server config
+The **complete technical analysis**, including scans, configurations, and remediation steps, is available in the PDF.
 
-Enable OCSP Stapling
+---
 
-Improve Certificate Transparency (CT)
-
-Fix missing pages (404s)
-
-Aim for A+ SSL Labs rating
-
-Align with OWASP A05: Security Misconfiguration
-
-📊 Compliance Alignment
-Standard	Requirement	Status
-OWASP Top 10 (2021)	A05: Security Misconfiguration	Partially Met
-NIST SP 800-52	Strong TLS, cipher order	Compliant
-PCI DSS v4.0	Encrypted transmission	Compliant
-NIST SP 800-53 (SC-8)	Network protection	Partially Met
-GDPR / HIPAA	Data in transit protection	Compliant
-🧠 About the Author
-
-Hi! I’m Pavle Stanković, a 17-year-old cybersecurity enthusiast from Serbia.
-I’m passionate about TLS, HTTP security, Linux hardening, and real-world penetration testing.
-
-🎓 Certified in Cybersecurity (CC) – (ISC)²
-🛠 I learn by doing: hands-on testing, case studies, and reporting
-🌍 My goal: become a professional ethical hacker and inspire others
-
-Contact & Profiles:
-📧 Email: stankovic.pavle16@gmail.com
-
-💼 LinkedIn: linkedin.com/in/pavle-stanković-914694386
-
-📘 License
-
-This project is licensed under CC BY-NC-ND 4.0.
-You may share this work for educational purposes with attribution.
-You may not modify or use commercially without permission.
-
-📁 Repository Contents
-── Web Security Configuration Assessment.pdf--->Full detailed report
-── README.md----------------------------------->Summary & highlights
-
-
-The full technical details, scans, and configuration examples are available in the PDF report.
-
-⭐ Support & Collaboration
-
-If you found this case study valuable:
-✅ Star the repository ⭐
-✅ Connect with me on LinkedIn
-✅ Let’s collaborate on security projects!
+### ⭐ If you found this useful  
+Give the repo a **star ⭐**, share it, and feel free to **connect or collaborate!**
