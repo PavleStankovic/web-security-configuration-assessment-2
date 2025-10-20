@@ -1,7 +1,7 @@
-# 🔐 Web Security Configuration Assessment — Public Case Study
+# 🔐 My Second Web Security Configuration Assessment — Public Case Study
 
 **Author:** Pavle Stankovic  
-**Date:** October 18, 2025  
+**Date:** October 20, 2025  
 **Location:** Serbia  
 **Age:** 17  
 **Domain:** `svstudiodesign.com`  
@@ -106,7 +106,7 @@ You may **read and share for educational purposes**, but please **credit the aut
 
 ## 🧩 Files
 
-- [`Web Security Configuration Assessment.pdf`](./Web%20Security%20Configuration%20Assessment.pdf) — Full detailed report  
+- [`Web Security Configuration Assessment2.pdf`](./Web%20Security%20Configuration%20Assessment2.pdf) — Full detailed report  
 - `README.md` — Summary and key insights  
 
 ---
