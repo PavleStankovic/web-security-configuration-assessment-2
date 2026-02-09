@@ -1,119 +1,81 @@
-# 🔐 Web Security Configuration Assessment — Second Individual Public Case Study
+# Web Security Configuration Assessment
 
-**Author:** Pavle Stankovic  
-**Date:** February 6, 2026  
-**Location:** Serbia  
-**Age:** 18  
-**Domain:** `svstudiodesign.com`  
-**License:** CC BY-NC-ND 4.0  
+**Target:** svstudiodesign.com  
+**Assessment Date:** February 6, 2026  
+**Tester:** Pavle Stankovic  
+**Authorization:** Explicit written permission from domain owner  
 
 ---
 
-## 🧭 Overview
+## Executive Summary
 
-This public case study examines the **SSL/TLS configuration** and **HTTP security headers** of a live production domain (`svstudiodesign.com`), conducted with **explicit permission from the owner**.  
-The objective was to identify configuration gaps, evaluate security posture against **modern industry standards**, and document the remediation process for **learning and transparency**.
+Black-box security assessment of SSL/TLS configuration and HTTP security headers for a production web application. Testing identified several configuration weaknesses (missing security headers, low Certificate Transparency coverage) alongside strong cryptographic implementation (TLS 1.2/1.3, modern cipher suites, forward secrecy).
 
-The assessment follows **OWASP**, **NIST**, and **PCI DSS v4.0** guidelines while maintaining a **non-intrusive, ethical approach**.
-
----
-
-## ⚙️ Scope & Methodology
-
-**Scope:**  
-- SSL/TLS protocol configuration  
-- Certificate validation & transparency (SCT, OCSP)  
-- Supported cipher suites & forward secrecy  
-- HTTP response security headers  
-
-**Out of Scope:**  
-- Internal infrastructure  
-- Application logic  
-- Authentication or intrusive exploitation  
-
-**Tools Used:**  
-- `sslyze` (TLS scanning)  
-- `nmap` (port/service enumeration)  
-- `curl`, `openssl` (header & handshake analysis)  
-- `testssl.sh` (TLS simulation & vulnerability checks)  
-- Browser DevTools  
-
-**Methodology References:**  
-- NIST SP 800-115  
-- OWASP Testing Guide v5  
+**Key Outcomes:**
+- Identified 8 configuration issues (2 Medium, 6 Low severity)
+- Provided actionable remediation with server config examples
+- Collaborated with site owner to fix HTTP-to-HTTPS redirect
+- Achieved SSL Labs A+ rating baseline with improvement roadmap
 
 ---
 
-## 🔎 Key Findings
+## Technical Approach
 
-| Issue | Severity | Recommendation |
-|-------|-----------|----------------|
-| Missing HSTS header | Medium | Add Strict-Transport-Security |
-| Missing CSP header | Medium | Implement a restrictive Content-Security-Policy |
-| Missing X-Frame-Options | Low | Add DENY or SAMEORIGIN |
-| Missing X-Content-Type-Options | Low | Set to nosniff |
-| Missing Referrer-Policy | Low | Add strict-origin or no-referrer |
-| OCSP Stapling disabled | Low | Enable stapling in server config |
-| Low SCT count (2) | Low | Reissue certificate with ≥3 SCTs |
-| 404 on common subpages | Low | Fix or remove broken endpoints |
+**Tools:**
+- sslyze (certificate validation, protocol enumeration)
+- testssl.sh (vulnerability scanning, client simulation)
+- nmap (port/service discovery)
+- curl + openssl (header analysis, handshake verification)
+- Qualys SSL Labs (configuration benchmarking)
 
-✅ **TLS 1.2/1.3 supported**  
-✅ **Forward Secrecy enabled**  
-✅ **Modern cipher suites** (AES-GCM, ChaCha20-Poly1305)  
-✅ **No critical vulnerabilities** (e.g., Heartbleed, POODLE, ROBOT)
+**Standards Referenced:**
+- OWASP Top 10:2021 (A05 - Security Misconfiguration)
+- NIST SP 800-52 Rev. 2 (TLS Guidelines)
+- PCI DSS v4.0 (Requirement 4)
 
 ---
 
-## 🛠️ Recommended Fixes
+## Findings Summary
 
-Configuration examples for **Apache** and **Nginx** are included in the full report.  
-Remediation focuses on achieving an **A+ SSL Labs rating** and aligning with **OWASP A05:2021 – Security Misconfiguration**.
+| Finding | CVSS 4.0 | Priority | Status |
+|---------|----------|----------|--------|
+| Missing HSTS | 4.8 | High | Open |
+| Missing CSP | 5.3 | High | Open |
+| Missing X-Frame-Options | 4.3 | Medium | Open |
+| Low SCT count (2 vs. 3+) | 3.1 | Medium | Open |
+| No OCSP Stapling | 2.4 | Low | Open |
 
----
-
-## 📊 Compliance Mapping
-
-| Standard | Requirement | Status |
-|-----------|-------------|--------|
-| OWASP Top 10:2021 | A05: Security Misconfiguration | Addressed |
-| NIST SP 800-52 Rev. 2 | Strong TLS & cipher usage | Compliant |
-| PCI DSS v4.0 | Req. 4: Secure transmission | Compliant |
-| NIST SP 800-53 (SC-8) | Transmission integrity | Partially Met |
-| GDPR/HIPAA | Encryption for data protection | Compliant |
-
----
-
-## 🧠 About the Author
-
-👋 I’m **Pavle Stankovic**, a **18-year-old cybersecurity enthusiast from Serbia** passionate about **web security, TLS, and ethical hacking**.  
-I learn by performing **real-world assessments**, implementing secure configurations, and sharing knowledge through public case studies.
-
-- 🌍 Location: Serbia  
-- 🎓 Student | Cybersecurity Learner  
-- 💡 Focus: TLS, HTTP security, OWASP practices, Linux hardening  
-- ✔ Certified in Cybersecurity (CC) – (ISC)²  
-- 📧 Email: [stankovic.pavle16@gmail.com](mailto:stankovic.pavle16@gmail.com)  
-- 💼 LinkedIn: [linkedin.com/in/pavle-stanković-914694386](https://linkedin.com/in/pavle-stanković-914694386)
+**Positive Findings:**
+- TLS 1.2/1.3 only (no deprecated protocols)
+- Strong AEAD cipher suites (AES-GCM, ChaCha20-Poly1305)
+- Forward secrecy enabled
+- Not vulnerable to Heartbleed, POODLE, FREAK, DROWN
 
 ---
 
-## 📘 License
+## Deliverables
 
-This work is licensed under **[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)**  
-You may **read and share for educational purposes**, but please **credit the author** and **do not modify or use commercially**.
+**[📄 Full Technical Report (PDF)](./Web%20Security%20Configuration%20Assessment2.pdf)**
 
----
-
-## 🧩 Files
-
-- [`Web Security Configuration Assessment2.pdf`](./Web%20Security%20Configuration%20Assessment2.pdf) — Full detailed report  
-- `README.md` — Summary and key insights  
-
----
-
-The **complete technical analysis**, including scans, configurations, and remediation steps, is available in the PDF.
+Includes:
+- Detailed methodology and tool selection rationale
+- Complete scan outputs and analysis
+- CVSS v4.0 scoring methodology with examples
+- Server configuration remediation (Apache/Nginx)
+- Compliance mapping (OWASP, NIST, PCI DSS)
 
 ---
 
-### ⭐ If you found this useful  
-Give the repo a **star ⭐**, share it, and feel free to **connect or collaborate!**
+## About
+
+**Pavle Stankovic**  
+18-year-old cybersecurity enthusiast | (ISC)² Certified in Cybersecurity (CC)  
+📍 Serbia  
+📧 stankovic.pavle16@gmail.com  
+💼 [LinkedIn](https://linkedin.com/in/pavle-stanković-914694386)
+
+*This assessment is part of my public learning portfolio demonstrating hands-on security analysis and professional reporting skills.*
+
+---
+
+**Ethical Note:** All testing was authorized. Sensitive infrastructure details (IP addresses) are redacted. This report is shared for educational purposes under responsible disclosure principles.
